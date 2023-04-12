@@ -284,9 +284,9 @@ particular set of files in `.gitignore`.
 *  Keep in mind that depending on the Git version used, the outputs for
    `git push` and `git pull` can vary slightly.
 
-## [Open Science]({{ page.root }}{% link _episodes/10-open.md %})
+## [Open Science]({{ page.root }}{% link _episodes/11-open.md %})
 
-## [Licensing]({{ page.root }}{% link _episodes/11-licensing.md %})
+## [Licensing]({{ page.root }}{% link _episodes/12-licensing.md %})
 
 We teach about licensing because questions about who owns what, or can use
 what, arise naturally once we start talking about using public services like
@@ -298,9 +298,9 @@ works (including software documentation and images used in software) but not
 software itself. Creative Commons [recommends][cc-faq-software] a
 software-specific license instead.
 
-## [Citation]({{ page.root }}{% link _episodes/12-citation.md %})
+## [Citation]({{ page.root }}{% link _episodes/13-citation.md %})
 
-## [Hosting]({{ page.root }}{% link _episodes/13-hosting.md %})
+## [Hosting]({{ page.root }}{% link _episodes/14-hosting.md %})
 
 A common concern for learners is having their work publicly available on
 GitHub.  While we encourage open science, sometimes private repos are the
