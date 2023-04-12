@@ -155,7 +155,46 @@ remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
 Unpacking objects: 100% (3/3), done.
 From https://github.com/vlad/planets
  * branch            main     -> FETCH_HEAD
-    29aba7c..dabb4c8  main     -> origin/main
+   2d8a740..3eb9f7c  main       -> origin/main
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+~~~
+{: .output}
+
+If this is the first time you run this command
+on the machine you are using,
+you might be facing this error message.
+As the error message suggests, it can be fixed by using 
+~~~
+git config --global pull.rebase false
+~~~
+{: .language-bash}
+Once this issue in our configuration is fixed,
+we can try again to pull:
+~~~
+$ git pull origin main
+~~~
+{: .language-bash}
+~~~
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/vlad/planets
+ * branch            main     -> FETCH_HEAD
+   2d8a740..3eb9f7c  main       -> origin/main
 Auto-merging mars.txt
 CONFLICT (content): Merge conflict in mars.txt
 Automatic merge failed; fix conflicts and then commit the result.
@@ -164,10 +203,12 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 The `git pull` command updates the local repository to include those
 changes already included in the remote repository.
-After the changes from remote branch have been fetched, Git detects that changes made to the local copy 
-overlap with those made to the remote repository, and therefore refuses to merge the two versions to
-stop us from trampling on our previous work. The conflict is marked in
-in the affected file:
+After the changes from remote branch have been fetched, 
+Git detects that changes made to the local copy 
+overlap with those made to the remote repository, 
+and therefore refuses to merge the two versions to
+stop us from trampling on our previous work. 
+The conflict is marked in in the affected file:
 
 ~~~
 $ cat mars.txt
@@ -191,6 +232,7 @@ Git has then inserted `=======` as a separator between the conflicting changes
 and marked the end of the content downloaded from GitHub with `>>>>>>>`.
 (The string of letters and digits after that marker
 identifies the commit we've just downloaded.)
+
 
 It is now up to us to edit this file to remove these markers
 and reconcile the changes.
@@ -325,6 +367,32 @@ Conflicts can also be minimized with project management strategies:
 - If the conflicts are stylistic churn (e.g. tabs vs. spaces), establish a
   project convention that is governing and use code style tools (e.g.
   `htmltidy`, `perltidy`, `rubocop`, etc.) to enforce, if necessary
+
+> ## A more informative conflict display style
+> Git can display conflicts in a more informative way if needed,
+> for example
+> ~~~
+> Cold and dry, but everything is my favorite color
+> The two moons may be a problem for Wolfman
+> But the Mummy will appreciate the lack of humidity
+> <<<<<<< HEAD
+> We added a different line in the other copy
+> ||||||| 2d8a740
+> =======
+> This line added to Wolfman's copy
+> ~~~
+> In this case, an additional section is added 
+> that starts with `||||||| 2d8a740`.
+> This represents the state of the file 
+> before the two set of conflicting changes were made,
+> i.e. at commit 2d8a740,
+> and in this case it is empty because the line causing the conflict
+> did not exist back then.
+> This style can be set as default with 
+> ~~~
+> git config --global merge.conflictstyle diff3
+> ~~~
+{: .callout}
 
 > ## Solving Conflicts that You Create
 >

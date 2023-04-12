@@ -82,6 +82,12 @@ working in teams or not, because it is
     *    [Code School][code-school] has a free interactive course, [Try Git][try-git].
     *    for instructors, [the Git parable][git-parable] is useful background reading
 
+*   To jump between episodes, or if someone needs to reconstruct 
+    the state of the repository without having the time to do all the steps,
+    checkout [this repository][planets-backup]
+    and checkout [the tags][planets-backup-tags].
+
+
 ## [Automated Version Control]({{ page.root }}{% link _episodes/01-basics.md %})
 
 *   Ask, "Who uses 'undo' in their editor?" All say "Me". 'Undo' is the simplest
@@ -321,3 +327,5 @@ web-hosted private repositories.
 [github-privacy]: https://help.github.com/articles/keeping-your-email-address-private/
 [repos-in-repos]: https://github.com/swcarpentry/git-novice/issues/272
 [try-git]: https://try.github.io
+[planets-backup]: https://github.com/mmesiti/planets-backup
+[planets-backup-tags]: https://github.com/mmesiti/planets-backup/tags

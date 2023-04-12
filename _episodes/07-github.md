@@ -1,6 +1,6 @@
 ---
 title: Remotes in GitHub
-teaching: 45
+teaching: 30
 exercises: 0
 questions:
 - "How do I share my changes with others on the web?"
@@ -201,7 +201,7 @@ Our local and remote repositories are now in this state:
 > ## The '-u' Flag
 >
 > You may see a `-u` option used with `git push` in some documentation.  This
-> option is synonymous with the `--set-upstream-to` option for the `git branch`
+> option is synonymous with the `--set-upstream` option for the `git branch`
 > command, and is used to associate the current branch with a remote branch so
 > that the `git pull` command can be used without any arguments. To do this,
 > simply use `git push -u origin main` once the remote has been set up.
