@@ -27,7 +27,7 @@ processors let us deal with this a little better, such as Microsoft
 Word's 
 [Track Changes](https://support.office.com/en-us/article/Track-changes-in-Word-197ba630-0f5f-4a8e-9a77-3712475e806a), 
 Google Docs' [version history](https://support.google.com/docs/answer/190843?hl=en), or 
-LibreOffice's [Recording and Displaying Changes](https://help.libreoffice.org/Common/Recording_and_Displaying_Changes).
+LibreOffice's [Recording and Displaying Changes](https://help.libreoffice.org/7.3/en-US/text/shared/guide/redlining.html).
 
 Version control systems start with a base version of the document and
 then record changes you make each step of the way. You can
