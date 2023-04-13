@@ -50,16 +50,16 @@ git log  --oneline --decorate --graph --all
 
 We notice that the commits 
 do not sit on a single line, 
-but there are branching points and merges.
+but there is a branching point and a merge.
 
-> ## Saving keystrokes: git aliases
+> ## Saving keystrokes and avoiding mistakes: git aliases
 > The command above
 > ~~~
 > git log  --oneline --decorate --graph --all
 > ~~~
 > {: .language-bash}
 > tends to be very useful, but it takes very long to type,
-> and it is quite likely that you will make a mistake while typing it.
+> and making a mistake while typing it is very likely.
 > For this reason, git allows *aliases* to be configured, 
 > with, for example
 > ~~~
@@ -127,19 +127,95 @@ at the moment.
 > > A part of a tree that grows out from the main stem [...].  
 >
 > We might also improperly refer to a branch 
-> as a group of commits that creates a single narrative.
+> as *a group of commits that creates a single narrative*.
 > But in Git terms, a branch is just a human-readable name
 > that points to a commit - keeping to the botanic analogy, 
 > a leaf at the tip of the branch. 
+>
 > In particular, this means that deleting a branch
 > does not mean deleting any work
 > (although, commits that cannot be reached from any branch
 > might be automatically deleted at some point).
+> 
+> It is true, though, that the commit the branch points at
+> will be updated to always be the last commit 
 {: .callout}
 
+## Creating branches and working with them
 
+At some point, Dracula has the idea 
+to get a gravity assist from Venus 
+to get to Mars faster. 
+It is not at all clear if this would work or not,
+so he decides to save all the work based on this idea 
+in another branch.
+
+Using the `git branch` command with some arguments
+~~~
+git branch gravity-assist main
+~~~
+{: .language-bash}
+we create another branch called `gravity-assist` 
+that will "graft" onto the last commit on the `main` branch.
+We can verify that we created a new branch
+with the `git branch` command again, without arguments this time:
+~~~
+git branch
+~~~
+{: .language-bash}
+~~~
+  gravity-assist
+* main
+~~~
+{: .output}
+We notice that we are still on the `main` branch. 
+To switch to the new branch,
+we use `git checkout`:
+~~~
+git checkout gravity-assist
+~~~
+{: .language-bash}
+~~~
+Switched to branch 'gravity-assist'
+~~~
+{: .output}
+Optionally, we can verify again the branch we are on with `git branch`.
+Whatever work we do now is not going to affect the `main` branch,
+and we are free to experiment as much as we like. 
+We add a file called `venus.txt` with the following content:
+~~~
+~~~
+{: .output}
+
+
+
+## Merging branches
+
+
+## Deleting branches safely
+
+## Tags
+
+
+> ## Other commands to create branches
+>  
+{: .challenge}
+
+> ## When to use branches
+> 
+{: .challenge}
+
+## Copyright notice
+
+This episode is based on/inspired by the [episode on branching][coderefinery-branching]
+in the course [Introduction to Version Control with Git][coderefinery-gitintro] developed by [CodeRefinery][coderefinery]
 
 [oxford-dict]: https://www.oxfordlearnersdictionaries.com/
+[coderefinery-branching]: https://coderefinery.github.io/git-intro/branches/
+[coderefinery-gitintro]: https://coderefinery.github.io/git-intro/
+[coderefinery]: https://coderefinery.org/
+
+
 
 
 
