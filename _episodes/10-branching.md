@@ -184,28 +184,245 @@ Whatever work we do now is not going to affect the `main` branch,
 and we are free to experiment as much as we like. 
 We add a file called `venus.txt` with the following content:
 ~~~
+The orbital period of Venus is 224 days.
+~~~
+{: .output}
+We can now add our new file to the staging area and commit:
+~~~
+git add venus.txt
+git commit -m "Start notes about Venus"
+~~~
+{: .language-bash}
+
+It turns out we did not properly round the orbital period of Venus, 
+which is actually 224.7 days.
+Let us correct that, and make another commit
+~~~
+The orbital period of Venus is 225 days.
+~~~
+{: .output}
+~~~
+git add venus.txt
+git commit -m "Fix orbital period of Venus"
+~~~
+{: .language-bash}
+
+Unfortunately the idea we are following does not seem to lead anywhere at the moment,
+and we decide to continue our work on the main branch:
+~~~
+git checkout main
+~~~
+{: .language-bash}
+We make sure that we are on the `main` branch again with `git branch`:
+~~~
+git branch
+~~~
+{: .language-bash}
+~~~
+  gravity-assist
+* main
+~~~
+{: .output}
+
+We keep working on `mars.txt`,
+adding the following line:
+~~~
+Landing on Mars (successfully) has historically proven difficult.
+~~~
+{: .output}
+Then we add the changes and commit them:
+~~~
+git add mars.txt
+git commit -m "Add notes on difficulty of the endeavour"
+~~~
+{: .language-bash}
+We can check our commit graph again with the `git log` command 
+(using the arrow up key to get it from the bash history):
+~~~
+git log  --oneline --decorate --graph --all
+~~~
+{: .language-bash}
+~~~
+* 0746194 (HEAD -> main) Add notes on difficulty of the endeavour
+| * 8da5718 (gravity-assist) Fix orbital period of Venus
+| * ed6944a Start notes about Venus
+|/  
+*   a53b0af (tag: 09-conflict-resolution, origin/main, origin/HEAD) Merge changes from GitHub
+|\  
+| * 3eb9f7c (tag: 09-conflict-principal) Add a line in our home copy
+* | 5f992dd (tag: 09-conflict-collaborator) Add a line in my copy
+|/  
+* 2d8a740 (tag: 08-collab) Add notes about Pluto
+* 54765f6 (tag: 06-ignore) Ignore data files and the result folder.
+* 47122ce (tag: exercises-04-changes) Add some initial thoughts on spaceships
+* 66ca75a (tag: 04-changes) Discuss concerns about Mars' climate for Mummy
+* 0aeaae3 Add concerns about effects of Mars' moons on Wolfman
+* 118561d Start notes on Mars as a base
+~~~
+{: .output}
+
+## Merging branches
+
+After discussing with our collaborators, 
+we decide that the gravity assist is worth pursuing,
+and we want to merge the work on the `gravity-assist` branch into `main`.
+We make sure once again that we are on the `main` branch:
+~~~
+git branch
+~~~
+{: .language-bash}
+~~~
+  gravity-assist
+* main
+~~~
+{: .output}
+We are then ready to merge `gravity-assist` into `main`:
+~~~
+git merge gravity-assist
+~~~
+{: .language-bash}
+This will open a text editor for a commit message.
+We can leave the default message as it is,
+save and exit the editor.
+We can check again the commit graph:
+~~~
+git log  --oneline --decorate --graph --all
+~~~
+{: .language-bash}
+~~~
+*   691f9d2 (HEAD -> main) Merge branch 'gravity-assist'
+|\  
+| * 8da5718 (gravity-assist) Fix orbital period of Venus
+| * ed6944a Start notes about Venus
+* | 0746194 Add notes on difficulty of the endeavour
+|/  
+*   a53b0af (tag: 09-conflict-resolution, origin/main, origin/HEAD) Merge changes from GitHub
+|\  
+| * 3eb9f7c (tag: 09-conflict-principal) Add a line in our home copy
+* | 5f992dd (tag: 09-conflict-collaborator) Add a line in my copy
+|/  
+* 2d8a740 (tag: 08-collab) Add notes about Pluto
+* 54765f6 (tag: 06-ignore) Ignore data files and the result folder.
+* 47122ce (tag: exercises-04-changes) Add some initial thoughts on spaceships
+* 66ca75a (tag: 04-changes) Discuss concerns about Mars' climate for Mummy
+* 0aeaae3 Add concerns about effects of Mars' moons on Wolfman
+* 118561d Start notes on Mars as a base
 ~~~
 {: .output}
 
 
-
-## Merging branches
-
-
 ## Deleting branches safely
+
+After a branch has been merged
+it is good practice to delete it.
+We can delete `gravity-assist` with the `git branch -d` command:
+~~~
+git branch -d gravity-assist 
+~~~
+{: .language-bash}
+~~~
+Deleted branch gravity-assist (was 8da5718).
+~~~
+{: .output}
+We can check the commit graph again:
+~~~
+git log  --oneline --decorate --graph --all
+~~~
+{: .language-bash}
+~~~
+*   691f9d2 (HEAD -> main) Merge branch 'gravity-assist'
+|\  
+| * 8da5718 Fix orbital period of Venus
+| * ed6944a Start notes about Venus
+* | 0746194 Add notes on difficulty of the endeavour
+|/  
+*   a53b0af (tag: 09-conflict-resolution, origin/main, origin/HEAD) Merge changes from GitHub
+|\  
+| * 3eb9f7c (tag: 09-conflict-principal) Add a line in our home copy
+* | 5f992dd (tag: 09-conflict-collaborator) Add a line in my copy
+|/  
+* 2d8a740 (tag: 08-collab) Add notes about Pluto
+* 54765f6 (tag: 06-ignore) Ignore data files and the result folder.
+* 47122ce (tag: exercises-04-changes) Add some initial thoughts on spaceships
+* 66ca75a (tag: 04-changes) Discuss concerns about Mars' climate for Mummy
+* 0aeaae3 Add concerns about effects of Mars' moons on Wolfman
+* 118561d Start notes on Mars as a base
+~~~
+{: .output}
+We see that the only the "pointer" 
+to the `gravity-assist` branch is gone,
+but not the commits,
+which have been already safely merged into `main`.
+
+Git will not let you delete a branch 
+which has not been merged in an other existing branch,
+unless you insist by using `git branch -D`.
+Even then, the commits are not lost,
+but they might be very hard to find 
+as there is no branch pointing to them.
 
 ## Tags
 
 
+
+
 > ## Other commands to create branches
->  
+> Creating a branch can be also done 
+> with `git checkout` and with `git switch`,
+> using the right options. 
+> Can you find the right options from the man page?
+> 
+> Hint: use `git help checkout`
+> and `git help switch`, 
+> and type `/create` to search for the word "create".
+> > ## Solution
+> > The command 
+> > ~~~
+> > git checkout -b new-branch
+> > ~~~
+> > {: .language-bash}
+> > does create a new branch and checks it out,
+> > it is a shortcut for `git branch new-branch ; git checkout new-branch`.
+> > The command 
+> > ~~~
+> > git switch -c new-branch
+> > ~~~
+> > {: .language-bash}
+> > does the same. 
+> > The `git switch` command is possibly easier to remember,
+> > but it might not be available in older versions of Git.
+> {: .solution}
 {: .challenge}
 
 > ## When to use branches
 > 
 {: .challenge}
 
+
+> ## Hard: recover deleted branches
+> 1. Create a new branch, add some work to it,
+>    and commit it. Do not merge it with any other branch.
+> 2. Force-delete it with `git branch -D`.
+> 3. How can you retrieve the lost work, by looking at the terminal?
+> 4. Can the `git reflog` command be useful?
+> 
+> > ## Solution
+> > After you saved the last commit message.
+> > you should have got a commit hash in the output message. 
+> > You can re-create a branch 
+> > named `rescue-branch`
+> > pointing to that commit with
+> > ~~~
+> > git branch rescue-branch-name <commit-id-recovered-from-terminal>
+> > ~~~
+> > {: .language-bash}
+> > A more robust way to recover commit hashes 
+> > is the command `git reflog`, 
+> > which shows the history of the movements of HEAD.
+> {: .solution}
+{: .challenge}
 ## Copyright notice
+
 
 This episode is based on/inspired by the [episode on branching][coderefinery-branching]
 in the course [Introduction to Version Control with Git][coderefinery-gitintro] developed by [CodeRefinery][coderefinery]
