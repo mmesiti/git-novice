@@ -1,6 +1,6 @@
 ---
 title: Branching
-teaching: 35
+teaching: 25
 exercises:  15 
 questions:
 - "FIXME"
@@ -128,17 +128,16 @@ at the moment.
 >
 > We might also improperly refer to a branch 
 > as *a group of commits that creates a single narrative*.
-> But in Git terms, a branch is just a human-readable name
+> But in the context of Git, a branch is just a human-readable name
 > that points to a commit - keeping to the botanic analogy, 
-> a leaf at the tip of the branch. 
+> a leaf usually at the tip of the branch. 
+> If we make more commits on a branch,
+> the pointed commit will be updated.
 >
 > In particular, this means that deleting a branch
 > does not mean deleting any work
 > (although, commits that cannot be reached from any branch
 > might be automatically deleted at some point).
-> 
-> It is true, though, that the commit the branch points at
-> will be updated to always be the last commit 
 {: .callout}
 
 ## Creating branches and working with them
@@ -207,8 +206,18 @@ git commit -m "Fix orbital period of Venus"
 ~~~
 {: .language-bash}
 
-Unfortunately the idea we are following does not seem to lead anywhere at the moment,
-and we decide to continue our work on the main branch:
+We want to publish the branch we are working on 
+to GitHub, so we can discuss the work 
+and share it with collaborators 
+(and also feel safer in case anything bad happens 
+to our laptop):
+~~~
+git push origin gravity-assist
+~~~
+{: .language-bash}
+We can check on GitHub that a new branch was created.
+While we wait for feedback,
+we decide to continue our work on the main branch:
 ~~~
 git checkout main
 ~~~
@@ -310,6 +319,11 @@ git log  --oneline --decorate --graph --all
 ~~~
 {: .output}
 
+We can then push our changes to main to the remote repository:
+~~~
+git push origin main
+~~~
+{: .language-bash}
 
 ## Deleting branches safely
 
@@ -363,6 +377,11 @@ as there is no branch pointing to them.
 
 ## Tags
 
+Tags are similar to branches,
+in the sense that they are a "pointer" to a commit,
+but contrarily to branches they do not change over time.
+They are a mechanism to elect some commits
+to a more important status.
 
 
 
@@ -394,8 +413,66 @@ as there is no branch pointing to them.
 > {: .solution}
 {: .challenge}
 
-> ## When to use branches
+> ## Delete remote branches 
+> Using the `planets` repository as a test playground,
+> create a branch called `test-branch`,
+> and push it to `origin`.
+> Verify that the branch is there.
+> To delete it, use
+> ~~~
+> git push origin -d test-branch
+>  ~~~
+> Verify that the branch is not there anymore.
+{: .challenge}
+
+> ## Using Tags
+> Using the `planets` repository as a test playground,
+> create a tag using the command
+> ~~~
+> git tag -a v0.1 -m "A test tag" 
+> ~~~
+> {: .language-bash}
+> You can verify that a new tag was created wit the 
+> `git tag` command (without arguments).
+> Check on the web page of your remote repository on GitHub 
+> (or wherever `origin` is): are any tags listed?
+> (The number of tags is usually shown at the top of the page)
 > 
+> Push the tag to the remote repository with 
+> ~~~
+> git push origin v0.1
+> ~~~
+> {: .language-bash}
+> Can you see it on the remote repository now? 
+>
+> ## Deleting Local Tags
+> Deleting branches is done with `git branch -d`.
+> Can you figure out how to delete a tag? 
+> > ## Solution
+> > To delete a tag locally:
+> > ~~~ 
+> > git tag -d <tag-name> 
+> > ~~~ 
+> > {: .language-bash}
+> {: .solution}
+>
+> ## Deleting Remote Tags
+> Create a tag called `v0.2` with message "test tag please ignore",
+> and push it to the remote repository.  
+> To delete a branch named `test-branch` 
+> on the remote repository called `origin`
+> One has to do `git push origin -d test-branch`.  
+> Can you figure out how to delete a tag on a remote repository?
+> > ## Solution 
+> > The web interface 
+> > on GitHub or GitLab
+> > provide the options to
+> > to delete a tag 
+> > in the menus.
+> > Alternatively, one can use exactly the same command as for branches:
+> > ~~~
+> > git push origin -d test-tag
+> {: .solution}
 {: .challenge}
 
 
