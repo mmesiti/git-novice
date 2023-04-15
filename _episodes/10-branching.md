@@ -3,13 +3,13 @@ title: Branching
 teaching: 25
 exercises:  15 
 questions:
-- "FIXME"
+- "How can I keep track of different lines of work efficiently?"
 objectives:
 - "Be able to create and merge branches."
 - "Know the difference between a branch and a tag."
 keypoints:
 - "use `git branch` to view, create and delete branches."
-- "FIXME"
+- "use `git tag` to view, create and delete tags."
 ---
 
 So far, every time 
@@ -496,6 +496,7 @@ to a more important status.
 > > A more robust way to recover commit hashes 
 > > is the command `git reflog`, 
 > > which shows the history of the movements of HEAD.
+> > Nothing is really lost when using Git. Even if you delete branches!
 > {: .solution}
 {: .challenge}
 ## Copyright notice
